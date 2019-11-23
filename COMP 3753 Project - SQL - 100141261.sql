@@ -15,6 +15,8 @@ CREATE TABLE customer (
     email varchar(100) NOT NULL,
     PRIMARY KEY (cust_id)
 );
+
+
 CREATE TABLE phone (
 	phone_id int(11) NOT NULL AUTO_INCREMENT,
     phone_number varchar(15) NOT NULL,
@@ -57,7 +59,7 @@ CREATE TABLE orders (
     postal_code varchar(50),
     cust_id int(11) NOT NULL,
     PRIMARY KEY (order_id),
-    FOREIGN KEY (status_id) REFERENCES statuses(status_id) ON DELETE CASCADE,
+    FOREIGN KEY (status_id) REFERENCES statuses(status_id),
     FOREIGN KEY (cust_id) REFERENCES customer(cust_id) ON DELETE CASCADE
 );
 
@@ -78,6 +80,14 @@ CREATE TABLE ordered_item (
 	FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
     FOREIGN KEY (item_id) REFERENCES item(item_id) ON DELETE CASCADE
 );
+
+/*CREATE TRIGGER stock_increment
+BEFORE DELETE ON customer
+FOR EACH ROW
+UPDATE item i
+SET i.stock = i.stock + order.quantity
+INNER JOIN ordered_item order ON order.item_id = i.item_id
+WHERE i.item_id = order.item_id;*/
 
 /* Create statuses */
 INSERT INTO statuses(order_status) VALUES ('in progress');
