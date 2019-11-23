@@ -1,0 +1,8 @@
+URLS for Reports
+
+Orders by status or date:
+http://localhost/database-store/reports.php?action=getStatusReport&startDate=1990-01-01&endDate=2019-01-01&status=2
+
+Orders by first or last name:
+http://localhost/database-store/reports.php?action=getCustomerReport&firstName=Gareth
+http://localhost/database-store/reports.php?action=getCustomerReport&lastName=Ross
